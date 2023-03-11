@@ -1,67 +1,31 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+//biblioteca para melhorar a sensibilidade do touch
+import 'react-native-gesture-handler';
+import React from 'react';
+//biblioteca de navegação entre as telas
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import TelaPrincipal from './src/components/TelaPrincipal/telaprincipal';
+import Login from './src/components/Login/login';
+ 
+const Stack = createStackNavigator(); // Cria uma pilha de telas
 
-export default function App() {
-  return (
-    <NativeProvider>
-    <Center w="100%">
-      <Box safeArea p="2" py="8" w="90%" maxW="290">
-        <Heading size="lg" fontWeight="600" color="coolGray.800" _dark={{
-        color: "warmGray.50"
-      }}>
-          Welcome
-        </Heading>
-        <Heading mt="1" _dark={{
-        color: "warmGray.200"
-      }} color="coolGray.600" fontWeight="medium" size="xs">
-          Sign in to continue!
-        </Heading>
-
-        <VStack space={3} mt="5">
-          <FormControl>
-            <FormControl.Label>Email ID</FormControl.Label>
-            <Input />
-          </FormControl>
-          <FormControl>
-            <FormControl.Label>Password</FormControl.Label>
-            <Input type="password" />
-            <Link _text={{
-            fontSize: "xs",
-            fontWeight: "500",
-            color: "indigo.500"
-          }} alignSelf="flex-end" mt="1">
-              Forget Password?
-            </Link>
-          </FormControl>
-          <Button mt="2" colorScheme="indigo">
-            Sign in
-          </Button>
-          <HStack mt="6" justifyContent="center">
-            <Text fontSize="sm" color="coolGray.600" _dark={{
-            color: "warmGray.200"
-          }}>
-              I'm a new user.{" "}
-            </Text>
-            <Link _text={{
-            color: "indigo.500",
-            fontWeight: "medium",
-            fontSize: "sm"
-          }} href="#">
-              Sign Up
-            </Link>
-          </HStack>
-        </VStack>
-      </Box>
-    </Center>
-    </NativeProvider>
-  );
+class App extends React.Component {
+  render() {
+    return (
+      <NavigationContainer> // Container principal para a navegação
+        <Stack.Navigator> // Define as telas da pilha
+          <Stack.Screen
+            name="VikingsGamestore" // Nome da tela principal
+            component={TelaPrincipal} // Componente a ser renderizado
+          />
+          <Stack.Screen
+            name="Login" // Nome da tela de login
+            component={Login} // Componente a ser renderizado
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    );
+  }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+ 
+export default App; // Exporta o componente App
